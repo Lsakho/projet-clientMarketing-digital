@@ -1,23 +1,33 @@
-<!DOCTYPE HTML>
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-	<meta charset="utf-8" />
-	<title>Convert Excel to HTML Table using JavaScript</title>
-	<meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <script type="text/javascript" src="https://unpkg.com/xlsx@0.15.1/dist/xlsx.full.min.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Formulaire Bootstrap</title>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 <body>
-    <div class="container">
-    	<h2 class="text-center mt-4 mb-4">Convert Excel to HTML Table using JavaScript</h2>
-    	<div class="card">
-    		<div class="card-header"><b>Select Excel File</b></div>
-    		<div class="card-body">			
-                <input type="file" id="excel_file" />
-    		</div>
-    	</div>
-        <div id="excel_data" class="mt-5"></div>
-    </div>
-    <script src="script.js"></script>
+  <div class="container">
+    <h1>Formulaire Bootstrap</h1>
+    <form>
+      <div class="form-group">
+        <label for="websiteLink">Lien du site web :</label>
+        <input type="text" class="form-control" id="websiteLink" placeholder="Entrez le lien du site web">
+      </div>
+      <div class="form-group">
+        <label for="excelFile">Importer un fichier Excel :</label>
+        <input type="file" class="form-control-file" id="excelFile">
+      </div>
+      <button type="button" class="btn btn-primary" onclick="getResult()">Obtenir les résultats</button>
+    </form>
+    
+    <div id="excel_data"></div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="script.js"></script>
+  <script src="https://unpkg.com/xlsx/dist/xlsx.full.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
