@@ -1,3 +1,11 @@
+// Cette fonction génère un tableau HTML à partir des données 
+// sheetData et l'insère dans l'élément ayant l'ID excel_data. 
+// Chaque ligne du tableau représente une ligne de sheetData. 
+// Les en-têtes de colonne sont extraits de la première ligne de 
+// sheetData, et chaque cellule est affichée en tant que cellule de 
+// tableau (<td>). La dernière colonne est réservée aux mentions 
+// et a un ID unique pour chaque cellule.
+
 function createTable(sheetData, excelDataOutput) {
     let tableOutput = '<table class="table table-striped table-bordered">';
     
@@ -25,9 +33,18 @@ function createTable(sheetData, excelDataOutput) {
     excelDataOutput.innerHTML = tableOutput;
   }
 
+  // Cette fonction compare les titres (titles) et les paragraphes 
+  // (paragraphs) extraits avec les données topQueriesData 
+  // provenant de sheetData. Elle compte le nombre d'occurrences 
+  // de chaque requête (query) dans les titres et les paragraphes, 
+  // et stocke les résultats dans l'objet occurrences. Ensuite, 
+  // elle met à jour les cellules de mention dans le tableau HTML avec les résultats.
+
   function compareTopQueries(titles, paragraphs, sheetData) {
     const topQueriesData = sheetData.slice(1).map(row => row[0]);
     const occurrences = {};
+
+  // Vérification que les données sont disponibles
   
     if (titles && paragraphs && topQueriesData) {
       titles.forEach(title => {
@@ -49,6 +66,8 @@ function createTable(sheetData, excelDataOutput) {
   
     const table = document.getElementById('excel_data');
     const rows = table.getElementsByTagName('tr');
+
+    // Mise à jour des cellules de mention dans le tableau
   
     for (let row = 1; row < rows.length; row++) {
       const query = sheetData[row][0];
@@ -61,15 +80,25 @@ function createTable(sheetData, excelDataOutput) {
       }
     }
   }
+
+  // Cette fonction est déclenchée lors du clic sur le bouton "Obtenir les résultats". 
+  // Elle récupère les valeurs des éléments HTML 
+  // (lien du site web et fichier Excel), vérifie le format du fichier et effectue 
+  // une requête fetch vers l'API à l'URL spécifiée. Elle utilise les résultats pour 
+  // générer le tableau HTML à l'aide de la fonction createTable et comparer 
+  // les requêtes les plus courantes avec les titres et les paragraphes à 
+  // l'aide de la fonction compareTopQueries.
   
 
   function getResult() {
-    var websiteLink = document.getElementById("websiteLink").value;
-    var excelFileInput = document.getElementById('excelFile');
-    var excelDataOutput = document.getElementById('excel_data');
+    let websiteLink = document.getElementById("websiteLink").value;
+    let excelFileInput = document.getElementById('excelFile');
+    let excelDataOutput = document.getElementById('excel_data');
 
     const file = excelFileInput.files[0];
     const allowedFormats = ['application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', 'application/vnd.ms-excel'];
+
+    // Vérification du format de fichier autorisé
 
     if (!allowedFormats.includes(file.type)) {
       excelDataOutput.innerHTML = '<div class="alert alert-danger">Seuls les formats de fichier .xlsx ou .xls sont autorisés</div>';
